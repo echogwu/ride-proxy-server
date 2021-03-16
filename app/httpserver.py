@@ -7,6 +7,10 @@ from subprocess import TimeoutExpired
 
 
 class Server(BaseHTTPRequestHandler):
+
+    CERT_FILE = ""
+    KEY_FILE = ""
+
     
     def _set_response(self, message: str, status_code=200):
         self.send_response(code=status_code)
@@ -118,8 +122,9 @@ def run(server_class=HTTPServer, handler_class=Server, addr="localhost", port=90
     server_address = (addr, port)
     httpd = server_class(server_address, handler_class)
     httpd.socket = ssl.wrap_socket (httpd.socket,
-        keyfile="/Users/echowu/Desktop/key.pem",
-        certfile='/Users/echowu/Desktop/cert.pem', server_side=True)
+        keyfile=KEY_FILE,
+        certfile=CERT_FILE, 
+        server_side=True)
 
     print(f"Starting httpd server on {addr}:{port}")
     httpd.serve_forever()
