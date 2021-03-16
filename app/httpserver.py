@@ -5,12 +5,10 @@ import ssl
 import subprocess
 from subprocess import TimeoutExpired
 
+CERT_FILE = "/Users/echowu/Desktop/cert.pem"
+KEY_FILE = "/Users/echowu/Desktop/key.pem"
 
 class Server(BaseHTTPRequestHandler):
-
-    CERT_FILE = ""
-    KEY_FILE = ""
-
     
     def _set_response(self, message: str, status_code=200):
         self.send_response(code=status_code)
